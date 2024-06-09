@@ -5,8 +5,48 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrawerGeometricFigures"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="550" Width="700"
+        ResizeMode="CanMinimize"
+        >
+    <Window.Resources>
+        
+        <Style TargetType="Menu" x:Name="Style_Menu">
+            <Setter Property="Margin" Value="5 0 0 0"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="FontFamily" Value="Centaur"/>
+        </Style>
+        
+    </Window.Resources>
+    <DockPanel x:Name="DockPanel_Main" LastChildFill="True" Background="LightGray">
+        
 
-    </Grid>
+        <!--Menu-->
+        <StatusBar x:Name="SatckPanel_Menu" DockPanel.Dock="Top" Height="40">
+            <Menu x:Name="Menu_Main">
+                <MenuItem x:Name="MenuItem_Shape" Header="Shape"/>
+                <MenuItem x:Name="MenuItem_Element" Header="Element">
+                    <MenuItem x:Name="MenuItem_ElementSave" Header="Save" />
+                    <MenuItem x:Name="MenuItem_ElementLoad" Header="Load"/>
+                </MenuItem>
+                <MenuItem x:Name="MenuItem_File" Header="File">
+                    <MenuItem x:Name="MenuItem_FileSave" Header="Save PNG"/>
+                    <MenuItem x:Name="MenuItem_FileClear" Header="Clear"/>
+                </MenuItem>
+                <MenuItem x:Name="MenuItem_Help" Header="Help"/>
+                <MenuItem x:Name="MenuItem_Exit" Header="Exit" />
+            </Menu>
+        </StatusBar>
+
+        <!--Footer-->
+        <StatusBar x:Name="StatusBar_Footer"  DockPanel.Dock="Bottom" Height="40">
+
+        </StatusBar>
+
+        <!--Working zone-->
+        <Canvas x:Name="Canvas_WorkingArea" Background="BlanchedAlmond">
+
+        </Canvas>
+
+    </DockPanel>
 </Window>
