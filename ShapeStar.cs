@@ -13,6 +13,13 @@ namespace DrawerGeometricFigures
 {
     public class ShapeStar
     {
+        const int MinWidth = 10;
+        const int MaxWidth = 300;
+        const int MinHeight = 10;
+        const int MaxHeigth = 300;
+        const int MinTickness = 1;
+        const int MaxTickness = 10;
+
         int width;
         int height;
         int tickness;
@@ -24,8 +31,8 @@ namespace DrawerGeometricFigures
             get => width;
             set
             {
-                if (value < 10 || value > 200) 
-                    throw new ArgumentException("The argument must be between 10 and 200");
+                if (value < MinWidth || value > MaxWidth) 
+                    throw new ArgumentException($"The argument must be between {MinWidth} and {MaxWidth}");
                 width = value;
             }
         }
@@ -33,8 +40,8 @@ namespace DrawerGeometricFigures
         {   get => height;
             set
             {
-                if (value < 10 || value > 200) 
-                    throw new ArgumentException("The argument must be between 10 and 200");
+                if (value < MinHeight || value > MaxHeigth) 
+                    throw new ArgumentException($"The argument must be between {MinHeight} and {MaxHeigth}");
                 height = value;
             }
         }
@@ -43,8 +50,8 @@ namespace DrawerGeometricFigures
             get => tickness;
             set
             {
-                if (value < 1 || value > 20)
-                    throw new ArgumentException("The argument must be between 1 and 20");
+                if (value < MinTickness || value > MaxTickness)
+                    throw new ArgumentException($"The argument must be between {MinTickness} and {MaxTickness}");
                 tickness = value;
             }
         }
