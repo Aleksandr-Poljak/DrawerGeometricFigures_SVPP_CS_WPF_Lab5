@@ -16,9 +16,17 @@ namespace DrawerGeometricFigures
     /// </summary>
     public partial class MainWindow : Window
     {
+        ShapeStar star = new();
         public MainWindow()
         {
             InitializeComponent();
+
+        }
+
+        private void MouseLeftBtnDown_Clik(object sender, MouseButtonEventArgs e)
+        {
+            
+            star.Draw(ref Canvas_WorkingArea, e.GetPosition(Canvas_WorkingArea));
         }
     }
 }

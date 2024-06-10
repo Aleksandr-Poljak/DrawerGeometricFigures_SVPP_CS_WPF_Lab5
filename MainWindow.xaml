@@ -44,7 +44,7 @@
         </StatusBar>
 
         <!--Working zone-->
-        <Canvas x:Name="Canvas_WorkingArea" Background="BlanchedAlmond">
+        <Canvas x:Name="Canvas_WorkingArea" Background="BlanchedAlmond" MouseLeftButtonDown="MouseLeftBtnDown_Clik">
 
         </Canvas>
 
