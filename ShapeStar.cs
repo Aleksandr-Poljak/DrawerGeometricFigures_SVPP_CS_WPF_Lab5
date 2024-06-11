@@ -135,7 +135,5 @@ namespace DrawerGeometricFigures
              canvas.Children.Add(star);           
         }
 
-
-
     }
 }

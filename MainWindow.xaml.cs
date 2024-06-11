@@ -17,6 +17,7 @@ namespace DrawerGeometricFigures
     public partial class MainWindow : Window
     {
         ShapeStar star = new();
+        StarSettingsWindow? starSettingsWindow = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,5 +29,19 @@ namespace DrawerGeometricFigures
             
             star.Draw(ref Canvas_WorkingArea, e.GetPosition(Canvas_WorkingArea));
         }
+
+
+        private void MenuItem_Shape_Click(object sender, RoutedEventArgs e)
+        {
+            if (starSettingsWindow is null)
+            {
+                starSettingsWindow = new StarSettingsWindow(ref star);
+                starSettingsWindow.Owner = this;
+                starSettingsWindow.Show();
+            }
+            else { starSettingsWindow.Focus(); }
+
+        }
+
     }
 }

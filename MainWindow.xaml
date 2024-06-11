@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrawerGeometricFigures"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="700"
+        Title="Star figure" Height="550" Width="700"
         ResizeMode="CanMinimize"
         >
     <Window.Resources>
@@ -24,7 +24,7 @@
         <!--Menu-->
         <StatusBar x:Name="SatckPanel_Menu" DockPanel.Dock="Top" Height="40">
             <Menu x:Name="Menu_Main">
-                <MenuItem x:Name="MenuItem_Shape" Header="Shape"/>
+                <MenuItem x:Name="MenuItem_Shape" Header="Shape" Click="MenuItem_Shape_Click"/>
                 <MenuItem x:Name="MenuItem_Element" Header="Element">
                     <MenuItem x:Name="MenuItem_ElementSave" Header="Save" />
                     <MenuItem x:Name="MenuItem_ElementLoad" Header="Load"/>
