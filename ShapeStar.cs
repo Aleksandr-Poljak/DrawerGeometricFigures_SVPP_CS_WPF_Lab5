@@ -14,12 +14,12 @@ namespace DrawerGeometricFigures
 {
     public class ShapeStar : INotifyPropertyChanged
     {
-        public static int MinWidth => 10;
-        public static int MaxWidth => 300;
-        public static int MinHeight => 10;
-        public static int MaxHeight => 300;
-        public static int MinTickness => 1;
-        public static int MaxTickness => 10;
+        public static int MinWidth { get; } = 10;
+        public static int MaxWidth { get; } = 300;
+        public static int MinHeight { get; } = 10;
+        public static int MaxHeight { get; } = 300;
+        public static int MinTickness { get; } = 1;
+        public static int MaxTickness { get; } = 10;
 
         int width;
         int height;
