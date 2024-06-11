@@ -35,8 +35,7 @@ namespace DrawerGeometricFigures
         {
             if (starSettingsWindow is null)
             {
-                starSettingsWindow = new StarSettingsWindow(ref star);
-                starSettingsWindow.Owner = this;
+                starSettingsWindow = new StarSettingsWindow(ref star) { Owner=this };
                 starSettingsWindow.Show();
             }
             else { starSettingsWindow.Focus(); }

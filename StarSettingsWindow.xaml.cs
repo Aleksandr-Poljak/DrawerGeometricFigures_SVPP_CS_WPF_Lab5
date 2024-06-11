@@ -19,18 +19,19 @@ namespace DrawerGeometricFigures
     /// </summary>
     public partial class StarSettingsWindow : Window
     {
-        ShapeStar s;
+        private ShapeStar star;
+
         public StarSettingsWindow( ref ShapeStar star)         
         {
             InitializeComponent();
             //this.Background =((DockPanel) this.Owner.Content).Background;
-            s = star;
-            this.DataContext = s;
+            this.star = star; 
+            DataContext = star;
         }
 
         private void Button_Ok_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(s.ToString());
+            MessageBox.Show(star.ToString());
         }
 
     }

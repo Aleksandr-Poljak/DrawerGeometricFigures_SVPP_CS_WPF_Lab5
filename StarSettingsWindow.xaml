@@ -9,6 +9,8 @@
         ResizeMode="CanMinimize">
     <Window.Resources>
 
+        <local:ShapeStar x:Key="ShapeStarResource"/>
+        
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontFamily" Value="Algerian"/>
@@ -21,6 +23,9 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Margin" Value="15"/>
+            <Setter Property="IsSnapToTickEnabled" Value="True"/>
+            <Setter Property="AutoToolTipPlacement" Value="BottomRight"/>
+            <Setter Property="AutoToolTipPrecision" Value="0"/>
         </Style>
         
     </Window.Resources>
@@ -51,16 +56,20 @@
         <Button x:Name="Button_Reset" Grid.Row="5" Grid.Column="1" Margin="15" FontSize="16" 
                 FontFamily="Arial" Content="Reset"/>
 
-        <Slider x:Name="Slider_Width" Grid.Row="2" Grid.Column="1" 
-                Value="{Binding Width}"
-                Minimum="{Binding MinWidth}" Maximum="{Binding MaxWidth}"/>
-        <Slider x:Name="Slider_Heigth" Grid.Row="3" Grid.Column="1"
-                Value="{Binding Heigth}"
-                Minimum="{Binding MinHeigth}" Maximum="{Binding MaxHeigth}"/>
-        <Slider x:Name="Slider_Tickness" Grid.Row="4" Grid.Column="1"
-                Value="{Binding Tickness}"
-                Minimum="{Binding MinTickness}" Maximum="{Binding MaxTickness}"/>
+        <Slider x:Name="Slider_Width" Grid.Row="2" Grid.Column="1"
+                Value="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Minimum="{Binding Source={StaticResource ShapeStarResource}, Path=MinWidth}"
+                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxWidth}"/>
 
+        <Slider x:Name="Slider_Height" Grid.Row="3" Grid.Column="1"
+                Value="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Minimum="{Binding Source={StaticResource ShapeStarResource}, Path=MinHeight}"
+                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxHeight}"/>
+
+        <Slider x:Name="Slider_Tickness" Grid.Row="4" Grid.Column="1"
+                Value="{Binding Tickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Minimum="{Binding Source={StaticResource ShapeStarResource}, Path=MinTickness}"
+                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxTickness}"/>
 
     </Grid>
 </Window>

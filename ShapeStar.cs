@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,21 +12,23 @@ using System.Windows.Shapes;
 
 namespace DrawerGeometricFigures
 {
-    public class ShapeStar
+    public class ShapeStar : INotifyPropertyChanged
     {
-        const int MinWidth = 10;
-        const int MaxWidth = 300;
-        const int MinHeight = 10;
-        const int MaxHeigth = 300;
-        const int MinTickness = 1;
-        const int MaxTickness = 10;
+        public static int MinWidth => 10;
+        public static int MaxWidth => 300;
+        public static int MinHeight => 10;
+        public static int MaxHeight => 300;
+        public static int MinTickness => 1;
+        public static int MaxTickness => 10;
 
         int width;
         int height;
         int tickness;
         Color foreground;
         Color background;
-       
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public int Width
         {
             get => width;
@@ -34,15 +37,17 @@ namespace DrawerGeometricFigures
                 if (value < MinWidth || value > MaxWidth) 
                     throw new ArgumentException($"The argument must be between {MinWidth} and {MaxWidth}");
                 width = value;
+                OnPropertyChanged(nameof(Width));
             }
         }
         public int Height 
         {   get => height;
             set
             {
-                if (value < MinHeight || value > MaxHeigth) 
-                    throw new ArgumentException($"The argument must be between {MinHeight} and {MaxHeigth}");
+                if (value < MinHeight || value > MaxHeight) 
+                    throw new ArgumentException($"The argument must be between {MinHeight} and {MaxHeight}");
                 height = value;
+                OnPropertyChanged(nameof(Height));
             }
         }
         public int Tickness 
@@ -53,10 +58,26 @@ namespace DrawerGeometricFigures
                 if (value < MinTickness || value > MaxTickness)
                     throw new ArgumentException($"The argument must be between {MinTickness} and {MaxTickness}");
                 tickness = value;
+                OnPropertyChanged(nameof(Thickness));
             }
         }
-        public Color Foreground { get => foreground; set => foreground = value; }
-        public Color Background { get => background; set => background = value; }
+        public Color Foreground 
+        {   get => foreground;
+            set 
+            {
+                foreground = value;
+                OnPropertyChanged(nameof(Foreground));
+            } 
+        }
+        public Color Background 
+        { 
+            get => background;
+            set
+            { 
+                background = value;
+                OnPropertyChanged(nameof(Background));        
+            }
+        }
 
         /// <summary>
         /// Default constructor
@@ -84,6 +105,12 @@ namespace DrawerGeometricFigures
         {
             return $"<Star: Width- {Width}, Height- {Height}, Tickness- {Tickness}," +
                 $" Background- {Background.ToString()}, Foreground {Foreground.ToString()}>";
+        }
+
+        public void OnPropertyChanged([CallerMemberName] string prop="")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
         /// <summary>
