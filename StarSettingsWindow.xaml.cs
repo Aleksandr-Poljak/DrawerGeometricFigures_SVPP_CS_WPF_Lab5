@@ -31,7 +31,7 @@ namespace DrawerGeometricFigures
 
         private void Button_Ok_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(star.ToString());
+            this.Close();
         }
 
     }
