@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace DrawerGeometricFigures
 {
-    public class ShapeStar : INotifyPropertyChanged
+    public class ShapeStar : INotifyPropertyChanged, ICloneable
     {
         public static int MinWidth { get; } = 10;
         public static int MaxWidth { get; } = 300;
@@ -161,6 +161,11 @@ namespace DrawerGeometricFigures
         public string ToJSON()
         {
             return "";
+        }
+
+        public object Clone()
+        {
+            return new ShapeStar(Width, Height, Tickness, Foreground, Background);
         }
     }
 }

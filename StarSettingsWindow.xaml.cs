@@ -20,6 +20,7 @@ namespace DrawerGeometricFigures
     public partial class StarSettingsWindow : Window
     {
         private ShapeStar star;
+        private ShapeStar backupStar;
 
         public StarSettingsWindow( ref ShapeStar star)         
         {
