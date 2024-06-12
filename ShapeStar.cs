@@ -118,7 +118,7 @@ namespace DrawerGeometricFigures
         /// </summary>
         /// <param name="top">Vertex coordinates</param>
         /// <returns>Polygon objects</returns>
-        public Polygon GetPolygonStar(Point top)
+        public Polygon ToPolygon(Point top)
         {
             PointCollection points = new PointCollection();
 
@@ -152,15 +152,12 @@ namespace DrawerGeometricFigures
         }
 
         /// <summary>
-        /// Displays a star on Canvas.
+        /// Returns the star shape as a JSON string
         /// </summary>
-        /// <param name="canvas">Canvas object</param>
-        /// <param name="top">Vertex coordinates</param>
-        public void Draw( ref Canvas canvas, Point top)
+        /// <returns>Figure in JSON.</returns>
+        public string ToJSON()
         {
-             Polygon star = GetPolygonStar(top);
-             canvas.Children.Add(star);           
+            return "";
         }
-
     }
 }

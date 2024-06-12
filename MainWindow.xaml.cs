@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics.Metrics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,10 +25,15 @@ namespace DrawerGeometricFigures
 
         }
 
+        /// <summary>
+        /// Right-click handler . Displays a star shape on Canvas.
+        /// </summary>
         private void MouseLeftBtnDown_Clik(object sender, MouseButtonEventArgs e)
-        {
+        {           
             
-            star.Draw(ref Canvas_WorkingArea, e.GetPosition(Canvas_WorkingArea));
+            Polygon starP = star.ToPolygon(e.GetPosition(Canvas_WorkingArea));
+            Canvas_WorkingArea.Children.Add(starP);
+
         }
 
 
@@ -36,6 +42,7 @@ namespace DrawerGeometricFigures
             if (starSettingsWindow is null)
             {
                 starSettingsWindow = new StarSettingsWindow(ref star) { Owner=this };
+                //Deletes an instance of the window after it is closed.
                 starSettingsWindow.Closed += (object? sender, EventArgs e) => starSettingsWindow = null;
 
                 starSettingsWindow.Show();
