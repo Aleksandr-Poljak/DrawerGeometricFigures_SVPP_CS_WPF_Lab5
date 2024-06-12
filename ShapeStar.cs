@@ -123,21 +123,24 @@ namespace DrawerGeometricFigures
             PointCollection points = new PointCollection();
 
             // The radius of the incircle and circumcircle
-            double outerRadius = height / 2;
-            double innerRadius = outerRadius * 0.5;
+            double outerRadiusX = Width / 2;
+            double outerRadiusY = Height / 2;
+            double innerRadiusX = outerRadiusX * 0.5;
+            double innerRadiusY = outerRadiusY * 0.5;
 
             // Calculate the offset to move the star so that the top point is at (top.X, top.Y)
             double cx = top.X;
-            double cy = top.Y + outerRadius * Math.Sin(18 * Math.PI / 180);
+            double cy = top.Y + outerRadiusY * Math.Sin(18 * Math.PI / 180);
 
             for (int i = 0; i < 10; i++)
             {
                 // Rotate by -90 degrees to align the top vertex
-                double angle = (i * 36 - 90) * Math.PI / 180; 
-                double radius = (i % 2 == 0) ? outerRadius : innerRadius;
+                double angle = (i * 36 - 90) * Math.PI / 180;
+                double radiusX = (i % 2 == 0) ? outerRadiusX : innerRadiusX;
+                double radiusY = (i % 2 == 0) ? outerRadiusY : innerRadiusY;
 
-                double px = cx + radius * Math.Cos(angle);
-                double py = cy + radius * Math.Sin(angle);
+                double px = cx + radiusX * Math.Cos(angle);
+                double py = cy + radiusY * Math.Sin(angle);
 
                 points.Add(new Point(px, py));
             }
@@ -147,7 +150,7 @@ namespace DrawerGeometricFigures
             star.Stroke = new SolidColorBrush(foreground);
             star.StrokeThickness = Tickness;
             star.Points = points;
-                                          
+
             return star;
         }
 
