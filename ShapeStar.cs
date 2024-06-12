@@ -18,12 +18,12 @@ namespace DrawerGeometricFigures
         public static int MaxWidth { get; } = 300;
         public static int MinHeight { get; } = 10;
         public static int MaxHeight { get; } = 300;
-        public static int MinTickness { get; } = 1;
-        public static int MaxTickness { get; } = 10;
+        public static int MinThickness { get; } = 1;
+        public static int MaxThickness { get; } = 10;
 
         int width;
         int height;
-        int tickness;
+        int thickness;
         Color foreground;
         Color background;
 
@@ -50,15 +50,15 @@ namespace DrawerGeometricFigures
                 OnPropertyChanged(nameof(Height));
             }
         }
-        public int Tickness 
+        public int Thickness 
         { 
-            get => tickness;
+            get => thickness;
             set
             {
-                if (value < MinTickness || value > MaxTickness)
-                    throw new ArgumentException($"The argument must be between {MinTickness} and {MaxTickness}");
-                tickness = value;
-                OnPropertyChanged(nameof(Tickness));
+                if (value < MinThickness || value > MaxThickness)
+                    throw new ArgumentException($"The argument must be between {MinThickness} and {MaxThickness}");
+                thickness = value;
+                OnPropertyChanged(nameof(Thickness));
             }
         }
         public Color Foreground 
@@ -86,7 +86,7 @@ namespace DrawerGeometricFigures
         {
             Height = 50;
             Width = 50;
-            Tickness = 2;
+            Thickness = 2;
             Background = Colors.Black;
             Foreground = Colors.DarkRed;
         }
@@ -96,14 +96,14 @@ namespace DrawerGeometricFigures
         {
             Width = width;
             Height = height;
-            Tickness = tickness;
+            Thickness = tickness;
             Foreground = foreground;
             Background = background;
         }
 
         public override string ToString()
         {
-            return $"<Star: Width- {Width}, Height- {Height}, Tickness- {Tickness}," +
+            return $"<Star: Width- {Width}, Height- {Height}, Tickness- {Thickness}," +
                 $" Background- {Background.ToString()}, Foreground {Foreground.ToString()}>";
         }
 
@@ -118,7 +118,7 @@ namespace DrawerGeometricFigures
         /// </summary>
         /// <param name="top">Vertex coordinates</param>
         /// <returns>Polygon objects</returns>
-        public Polygon ToPolygon(Point top)
+        public Polygon GetPolygonFigure(Point top)
         {
             PointCollection points = new PointCollection();
 
@@ -148,7 +148,7 @@ namespace DrawerGeometricFigures
             Polygon star = new();
             star.Fill = new SolidColorBrush(background);
             star.Stroke = new SolidColorBrush(foreground);
-            star.StrokeThickness = Tickness;
+            star.StrokeThickness = Thickness;
             star.Points = points;
 
             return star;
@@ -165,7 +165,7 @@ namespace DrawerGeometricFigures
 
         public object Clone()
         {
-            return new ShapeStar(Width, Height, Tickness, Foreground, Background);
+            return new ShapeStar(Width, Height, Thickness, Foreground, Background);
         }
     }
 }

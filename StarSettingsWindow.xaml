@@ -53,7 +53,7 @@
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Width"/>
         <TextBlock Grid.Row="3" Grid.Column="0" 
                    Text="Height"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" Text="Tickness"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Thickness"/>
 
         <Button x:Name="Button_Ok" Grid.Row="5" Grid.Column="0" Margin="15" FontSize="16"
                 FontFamily="Arial" Content="Ok" Click="Button_Ok_Click"/>
@@ -73,7 +73,7 @@
                 Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxHeight}"
                 TickFrequency="10" TickPlacement="TopLeft" IsSnapToTickEnabled="True"/>
 
-        <Slider x:Name="Slider_Tickness" Grid.Row="4" Grid.Column="1"
+        <Slider x:Name="Slider_Thickness" Grid.Row="4" Grid.Column="1"
                 Value="{Binding Tickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="{Binding Source={StaticResource ShapeStarResource}, Path=MinTickness}"
                 Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxTickness}"

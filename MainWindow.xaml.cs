@@ -31,11 +31,18 @@ namespace DrawerGeometricFigures
         private void MouseLeftBtnDown_Clik(object sender, MouseButtonEventArgs e)
         {           
             
-            Polygon starP = star.ToPolygon(e.GetPosition(Canvas_WorkingArea));
+            Polygon starP = star.GetPolygonFigure(e.GetPosition(Canvas_WorkingArea));
+            starP.MouseRightButtonDown += StarP_MouseRightButtonDown;
             Canvas_WorkingArea.Children.Add(starP);
 
         }
 
+        private void StarP_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Polygon st = (Polygon)sender;
+
+            MessageBox.Show((st.Points.ToString()));
+        }
 
         private void MenuItem_Shape_Click(object sender, RoutedEventArgs e)
         {

@@ -43,7 +43,7 @@ namespace DrawerGeometricFigures
             star.Foreground = backupStar.Foreground;
             star.Height = backupStar.Height;
             star.Width = backupStar.Width;
-            star.Tickness = backupStar.Tickness;
+            star.Thickness = backupStar.Thickness;
         }
     }
 }
