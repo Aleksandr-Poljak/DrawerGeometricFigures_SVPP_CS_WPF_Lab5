@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrawerGeometricFigures"
         mc:Ignorable="d"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="Star settings" Height="400" Width="350"
         ResizeMode="CanMinimize">
     <Window.Resources>
@@ -25,9 +26,11 @@
             <Setter Property="Margin" Value="15"/>
             <Setter Property="IsSnapToTickEnabled" Value="True"/>
             <Setter Property="AutoToolTipPlacement" Value="BottomRight"/>
-            <Setter Property="AutoToolTipPrecision" Value="1"/>
+            <Setter Property="AutoToolTipPrecision" Value="0"/>
+        </Style>
 
-
+        <Style TargetType="xctk:ColorPicker">
+            <Setter Property="Margin" Value="15"/>
         </Style>
         
     </Window.Resources>
@@ -75,6 +78,13 @@
                 Minimum="{Binding Source={StaticResource ShapeStarResource}, Path=MinTickness}"
                 Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxTickness}"
                 TickFrequency="1" TickPlacement="TopLeft" IsSnapToTickEnabled="True"/>
+
+        <xctk:ColorPicker x:Name="ColorPicker_Background" Grid.Row="0" Grid.Column="1" 
+                          SelectedColor="{Binding Background, 
+                          Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <xctk:ColorPicker x:Name="ColorPicker_Foreground" Grid.Row="1" Grid.Column="1" 
+                            SelectedColor="{Binding Foreground, 
+                            Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
     </Grid>
 </Window>

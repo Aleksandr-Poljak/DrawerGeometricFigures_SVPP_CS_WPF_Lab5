@@ -42,6 +42,9 @@ namespace DrawerGeometricFigures
             if (starSettingsWindow is null)
             {
                 starSettingsWindow = new StarSettingsWindow(ref star) { Owner=this };
+
+                // Set the background of the main window to the child window.
+                starSettingsWindow.Background = ((DockPanel)this.Content).Background;
                 //Deletes an instance of the window after it is closed.
                 starSettingsWindow.Closed += (object? sender, EventArgs e) => starSettingsWindow = null;
 
