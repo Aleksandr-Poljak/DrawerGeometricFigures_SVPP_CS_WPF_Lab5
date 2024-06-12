@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.NetworkInformation;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,9 @@ namespace DrawerGeometricFigures
 {
     public class ShapeEllipse
     {
+        static private List<Color> allCollors = new List<Color>();
+        static private Random rd = new Random();
+
         int width;
         int height;
         int thickness;
@@ -31,7 +36,7 @@ namespace DrawerGeometricFigures
             Width = 50;
             Height = 50;
             Thickness = 5;
-            Foreground = Colors.Red;
+            Foreground = allCollors[rd.Next(allCollors.Count)];
             Background = _getRandomLenearGradientBrush();
         }
    
@@ -67,18 +72,13 @@ namespace DrawerGeometricFigures
         /// <returns></returns>
         private LinearGradientBrush _getRandomLenearGradientBrush(int countColors = 3)
         {
-            Random rd = new Random();
             GradientStopCollection gradientStops = new GradientStopCollection();
 
             for (int i = 0; i < countColors; i++)
             {
-                // Random color name
-                int numberColor = rd.Next(Enum.GetNames(typeof(Colors)).Length);
-                string randomColorName = Enum.GetNames(typeof(Colors))[numberColor];
-
-                Color randomColor = (Color)ColorConverter.ConvertFromString(randomColorName);
-
-                gradientStops.Add(new GradientStop(randomColor, (double)i / (countColors - 1)));
+                // Random color     
+                gradientStops.Add(new GradientStop(allCollors[rd.Next(allCollors.Count)],
+                    (double)i / (countColors - 1)));
             }
 
             return new LinearGradientBrush(gradientStops, 0);
@@ -104,6 +104,23 @@ namespace DrawerGeometricFigures
                 $" Background- {Background.ToString()}, Foreground {Foreground.ToString()}>";
         }
 
+        /// <summary>
+        /// The static constructor populates a collection of colors 
+        /// for the last random color selection.
+        /// </summary>
+        static ShapeEllipse()
+        {
+            PropertyInfo[] colorProperties = typeof(Colors).GetProperties(
+                BindingFlags.Static | BindingFlags.Public);
 
+            foreach (PropertyInfo prop in colorProperties)
+            {
+                if (prop.PropertyType == typeof(Color))
+                    allCollors.Add((Color)prop.GetValue(null));
+
+            }
+            allCollors.TrimExcess();
+        }
+            
     }
 }
