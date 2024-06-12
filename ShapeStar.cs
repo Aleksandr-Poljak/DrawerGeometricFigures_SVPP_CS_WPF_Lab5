@@ -58,7 +58,7 @@ namespace DrawerGeometricFigures
                 if (value < MinTickness || value > MaxTickness)
                     throw new ArgumentException($"The argument must be between {MinTickness} and {MaxTickness}");
                 tickness = value;
-                OnPropertyChanged(nameof(Thickness));
+                OnPropertyChanged(nameof(Tickness));
             }
         }
         public Color Foreground 

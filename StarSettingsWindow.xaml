@@ -25,7 +25,9 @@
             <Setter Property="Margin" Value="15"/>
             <Setter Property="IsSnapToTickEnabled" Value="True"/>
             <Setter Property="AutoToolTipPlacement" Value="BottomRight"/>
-            <Setter Property="AutoToolTipPrecision" Value="0"/>
+            <Setter Property="AutoToolTipPrecision" Value="1"/>
+
+
         </Style>
         
     </Window.Resources>
@@ -54,22 +56,25 @@
                 FontFamily="Arial" Content="Ok" Click="Button_Ok_Click"/>
 
         <Button x:Name="Button_Reset" Grid.Row="5" Grid.Column="1" Margin="15" FontSize="16" 
-                FontFamily="Arial" Content="Reset"/>
+                FontFamily="Arial" Content="Reset" Click="Button_Reset_Click"/>
 
         <Slider x:Name="Slider_Width" Grid.Row="2" Grid.Column="1"
                 Value="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="{Binding Source={StaticResource ShapeStarResource}, Path=MinWidth}"
-                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxWidth}"/>
+                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxWidth}"
+                TickFrequency="10" TickPlacement="TopLeft" IsSnapToTickEnabled="True"/>
 
         <Slider x:Name="Slider_Height" Grid.Row="3" Grid.Column="1"
                 Value="{Binding Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="{Binding Source={StaticResource ShapeStarResource}, Path=MinHeight}"
-                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxHeight}"/>
+                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxHeight}"
+                TickFrequency="10" TickPlacement="TopLeft" IsSnapToTickEnabled="True"/>
 
         <Slider x:Name="Slider_Tickness" Grid.Row="4" Grid.Column="1"
                 Value="{Binding Tickness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Minimum="{Binding Source={StaticResource ShapeStarResource}, Path=MinTickness}"
-                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxTickness}"/>
+                Maximum="{Binding Source={StaticResource ShapeStarResource}, Path=MaxTickness}"
+                TickFrequency="1" TickPlacement="TopLeft" IsSnapToTickEnabled="True"/>
 
     </Grid>
 </Window>

@@ -28,6 +28,8 @@ namespace DrawerGeometricFigures
             //this.Background =((DockPanel) this.Owner.Content).Background;
             this.star = star; 
             DataContext = star;
+
+            backupStar = (ShapeStar)star.Clone();
         }
 
         private void Button_Ok_Click(object sender, RoutedEventArgs e)
@@ -35,5 +37,13 @@ namespace DrawerGeometricFigures
             this.Close();
         }
 
+        private void Button_Reset_Click(object sender, RoutedEventArgs e)
+        {
+            star.Background = backupStar.Background;
+            star.Foreground = backupStar.Foreground;
+            star.Height = backupStar.Height;
+            star.Width = backupStar.Width;
+            star.Tickness = backupStar.Tickness;
+        }
     }
 }
