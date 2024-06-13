@@ -7,6 +7,7 @@ using System.Windows.Documents;
 using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -20,10 +21,25 @@ namespace DrawerGeometricFigures
     {
         ShapeStar star = new();
         StarSettingsWindow? starSettingsWindow = null;
+
+        Random rd = new();
+        private double canvasWidth;
+        private double canvasHeight;
+
         public MainWindow()
         {
             InitializeComponent();
+            Loaded += MainWindow_Loaded;
 
+        }
+
+        /// <summary>
+        /// Window loading event handler.
+        /// </summary>
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            canvasWidth = Canvas_WorkingArea.ActualWidth;
+            canvasHeight = Canvas_WorkingArea.ActualHeight;
         }
 
         /// <summary>
@@ -44,23 +60,21 @@ namespace DrawerGeometricFigures
         /// </summary>
         private void StarP_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Polygon st = (Polygon)sender;
-            ShapeStar star1 = ShapeStar.PolygonToStar(st);
-            
-            string s = $"Original:\n{star.ToString()}\nConvert:\n{star1.ToString()}";
-            MessageBox.Show(s);
+            Polygon starP = (Polygon)sender; // Get UI element star figure
+            ShapeStar starS = ShapeStar.PolygonToStar(starP); // Get star ShapeStar from star polygon
+            Point clickPosition = e.GetPosition(Canvas_WorkingArea); // Getposiotion                            
 
+            //Get an ellipse object the same size as the star
+            ShapeEllipse ellipse = new ShapeEllipse(starS);
+            // Get ellipse UI element 
+            Ellipse el = ellipse.GetEllipseFigure();
 
-            Point clickPosition = e.GetPosition(Canvas_WorkingArea);
-                               
-            //MessageBox.Show($"{p.Count} - {p.ToString()}");
+            // Display an ellipse on top of a star
+            Canvas.SetLeft(el, clickPosition.X - el.Width / 2);
+            Canvas.SetTop(el, clickPosition.Y - el.Height / 3);
+            Canvas_WorkingArea.Children.Add(el);
 
-            //ShapeEllipse ellipse = new ShapeEllipse(star);
-            //Ellipse el = ellipse.GetEllipseFigure();
-
-            //Canvas.SetLeft(el, clickPosition.X - el.Width / 2);
-            //Canvas.SetTop(el, clickPosition.Y - el.Height / 3);
-            //Canvas_WorkingArea.Children.Add(el);
+            animateEllipse(el);
 
         }
 
@@ -80,6 +94,44 @@ namespace DrawerGeometricFigures
             }
             else { starSettingsWindow.Focus(); }
 
+        }
+
+        /// <summary>
+        /// Creates an animation of an ellipse. The ellipse moves in a random direction.
+        /// </summary>
+        /// <param name="el"></param>
+        private void animateEllipse(Ellipse el)
+        {
+            // New ellipse posiotion
+            double newX = rd.NextDouble() * (canvasWidth - el.ActualWidth);
+            double newY = rd.NextDouble() * (canvasHeight - el.ActualHeight);
+
+            //current ellipse posiotion
+            double currentX = Canvas.GetLeft(el);
+            double currentY = Canvas.GetTop(el);
+
+            // horizontal motion animation
+            DoubleAnimation xAnimation = new() 
+            { 
+                From=currentX,
+                To=newX,
+                Duration = TimeSpan.FromSeconds(2),
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
+            // vertical motion animation
+            DoubleAnimation yAnimation = new()
+            {
+                From = currentY,
+                To = newY,
+                Duration = TimeSpan.FromSeconds(2),
+                EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+            };
+            // Бесприрывная анимация.
+            xAnimation.Completed += (s, e) => animateEllipse(el);
+            yAnimation.Completed += (s, e) => animateEllipse(el);
+
+            el.BeginAnimation(Canvas.LeftProperty, xAnimation);
+            el.BeginAnimation(Canvas.TopProperty, yAnimation); 
         }
 
     }

@@ -30,7 +30,6 @@
                     <MenuItem x:Name="MenuItem_ElementLoad" Header="Load"/>
                 </MenuItem>
                 <MenuItem x:Name="MenuItem_File" Header="File">
-                    <MenuItem x:Name="MenuItem_FileSave" Header="Save PNG"/>
                     <MenuItem x:Name="MenuItem_FileClear" Header="Clear"/>
                 </MenuItem>
                 <MenuItem x:Name="MenuItem_Help" Header="Help"/>
