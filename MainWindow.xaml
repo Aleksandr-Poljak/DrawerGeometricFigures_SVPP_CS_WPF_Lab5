@@ -9,12 +9,19 @@
         ResizeMode="CanMinimize"
         >
     <Window.Resources>
-        
-        <Style TargetType="Menu" x:Name="Style_Menu">
+
+        <Style TargetType="Menu" x:Name="Style_Menu" >
             <Setter Property="Margin" Value="5 0 0 0"/>
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Padding" Value="3"/>
             <Setter Property="FontFamily" Value="Centaur"/>
+        </Style>
+        
+        <Style TargetType="TextBlock" x:Name="Style_TextBlock">
+            <Setter Property="Margin" Value="8 0 0 0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="FontFamily" Value="Arial"/>
         </Style>
         
     </Window.Resources>
@@ -38,12 +45,20 @@
         </StatusBar>
 
         <!--Footer-->
-        <StatusBar x:Name="StatusBar_Footer"  DockPanel.Dock="Bottom" Height="40">
-
+        <StatusBar x:Name="StatusBar_Footer" DockPanel.Dock="Bottom" Height="40">
+            <StatusBarItem HorizontalAlignment="Left">
+                <TextBlock x:Name="TextBlock_FooterMausePosition" Text="X=0 Y=0"
+                           Padding="8"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="TextBlock_FooterCountStar" 
+                           Text="Star=0"
+                           Padding="8"/>
+            </StatusBarItem>
         </StatusBar>
 
         <!--Working zone-->
-        <Canvas x:Name="Canvas_WorkingArea" Background="BlanchedAlmond" MouseLeftButtonDown="MouseLeftBtnDown_Clik">
+        <Canvas x:Name="Canvas_WorkingArea" Background="BlanchedAlmond" MouseLeftButtonDown="MouseLeftBtnDown_Clik" MouseMove="MouseMove_Motion">
         </Canvas>
 
     </DockPanel>

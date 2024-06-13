@@ -95,6 +95,7 @@ namespace DrawerGeometricFigures
             el.StrokeThickness = Thickness;
             el.Stroke = new SolidColorBrush(foreground);
             el.Fill = Background;
+            el.Opacity = 0.7 + (1.0 - 0.7) * rd.NextDouble();
             return el;
         }
 

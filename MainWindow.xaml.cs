@@ -26,6 +26,8 @@ namespace DrawerGeometricFigures
         private double canvasWidth;
         private double canvasHeight;
 
+        int countStar = 0;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -51,6 +53,9 @@ namespace DrawerGeometricFigures
             Polygon starP = star.GetPolygonFigure(e.GetPosition(Canvas_WorkingArea));
             starP.MouseRightButtonDown += StarP_MouseRightButtonDown;
             Canvas_WorkingArea.Children.Add(starP);
+
+            countStar++;
+            TextBlock_FooterCountStar.Text = $"Star={countStar}";
 
         }
 
@@ -134,5 +139,13 @@ namespace DrawerGeometricFigures
             el.BeginAnimation(Canvas.TopProperty, yAnimation); 
         }
 
+        private void MouseMove_Motion(object sender, MouseEventArgs e)
+        {
+            Point mousePoint = e.GetPosition(Canvas_WorkingArea);
+            string text = $"X={mousePoint.X:F1} Y={mousePoint.Y:F1}";
+            TextBlock_FooterMausePosition.Text = text;
+
+
+        }
     }
 }
