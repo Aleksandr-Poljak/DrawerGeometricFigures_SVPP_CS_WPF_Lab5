@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -37,11 +38,30 @@ namespace DrawerGeometricFigures
 
         }
 
+        /// <summary>
+        /// Handler for right-clicking on a star. 
+        /// Creates the described ellipse on Canvas.
+        /// </summary>
         private void StarP_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             Polygon st = (Polygon)sender;
+            ShapeStar star1 = ShapeStar.PolygonToStar(st);
+            
+            string s = $"Original:\n{star.ToString()}\nConvert:\n{star1.ToString()}";
+            MessageBox.Show(s);
 
-            MessageBox.Show((st.Points.ToString()));
+
+            Point clickPosition = e.GetPosition(Canvas_WorkingArea);
+                               
+            //MessageBox.Show($"{p.Count} - {p.ToString()}");
+
+            //ShapeEllipse ellipse = new ShapeEllipse(star);
+            //Ellipse el = ellipse.GetEllipseFigure();
+
+            //Canvas.SetLeft(el, clickPosition.X - el.Width / 2);
+            //Canvas.SetTop(el, clickPosition.Y - el.Height / 3);
+            //Canvas_WorkingArea.Children.Add(el);
+
         }
 
         private void MenuItem_Shape_Click(object sender, RoutedEventArgs e)

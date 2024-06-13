@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using Xceed.Wpf.Toolkit.Core.Converters;
 
 namespace DrawerGeometricFigures
 {
@@ -34,24 +35,25 @@ namespace DrawerGeometricFigures
             get => width;
             set
             {
-                if (value < MinWidth || value > MaxWidth) 
+                if (value < MinWidth || value > MaxWidth)
                     throw new ArgumentException($"The argument must be between {MinWidth} and {MaxWidth}");
                 width = value;
                 OnPropertyChanged(nameof(Width));
             }
         }
-        public int Height 
-        {   get => height;
+        public int Height
+        {
+            get => height;
             set
             {
-                if (value < MinHeight || value > MaxHeight) 
+                if (value < MinHeight || value > MaxHeight)
                     throw new ArgumentException($"The argument must be between {MinHeight} and {MaxHeight}");
                 height = value;
                 OnPropertyChanged(nameof(Height));
             }
         }
-        public int Thickness 
-        { 
+        public int Thickness
+        {
             get => thickness;
             set
             {
@@ -61,21 +63,22 @@ namespace DrawerGeometricFigures
                 OnPropertyChanged(nameof(Thickness));
             }
         }
-        public Color Foreground 
-        {   get => foreground;
-            set 
+        public Color Foreground
+        {
+            get => foreground;
+            set
             {
                 foreground = value;
                 OnPropertyChanged(nameof(Foreground));
-            } 
+            }
         }
-        public Color Background 
-        { 
+        public Color Background
+        {
             get => background;
             set
-            { 
+            {
                 background = value;
-                OnPropertyChanged(nameof(Background));        
+                OnPropertyChanged(nameof(Background));
             }
         }
 
@@ -91,7 +94,7 @@ namespace DrawerGeometricFigures
             Foreground = Colors.DarkRed;
         }
 
-        public ShapeStar(int width, int height, int tickness, Color foreground, Color background):
+        public ShapeStar(int width, int height, int tickness, Color foreground, Color background) :
             this()
         {
             Width = width;
@@ -107,7 +110,7 @@ namespace DrawerGeometricFigures
                 $" Background- {Background.ToString()}, Foreground {Foreground.ToString()}>";
         }
 
-        public void OnPropertyChanged([CallerMemberName] string prop="")
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
@@ -144,12 +147,20 @@ namespace DrawerGeometricFigures
 
                 points.Add(new Point(px, py));
             }
+            Dictionary<string, int> originalData = new()
+            {
+                ["Width"] = Width,
+                ["Height"] = Height,
+                ["Thickness"] = Thickness,
+            };
 
             Polygon star = new();
             star.Fill = new SolidColorBrush(background);
             star.Stroke = new SolidColorBrush(foreground);
             star.StrokeThickness = Thickness;
             star.Points = points;
+            // Save in polygon original parameters.
+            star.Tag = originalData;
 
             return star;
         }
@@ -166,6 +177,26 @@ namespace DrawerGeometricFigures
         public object Clone()
         {
             return new ShapeStar(Width, Height, Thickness, Foreground, Background);
+        }
+
+        /// <summary>
+        /// The method recreates a ShapeStar object from a Polygon object.
+        /// </summary>
+        static public ShapeStar PolygonToStar(Polygon polFigure)
+        {
+            if (!(polFigure.Tag is Dictionary<string, int>))
+                throw new ArgumentException("Invalid polygon");
+
+            Dictionary<string, int> originalData = polFigure.Tag as Dictionary<string, int>;
+
+            int width = originalData["Width"];
+            int height = originalData["Height"];
+            int thickness = originalData["Thickness"];
+            Color bg = ((SolidColorBrush)polFigure.Stroke).Color;
+            Color fg = ((SolidColorBrush)polFigure.Fill).Color;
+
+            return new ShapeStar(width, height, thickness, bg, fg);
+
         }
     }
 }
