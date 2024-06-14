@@ -51,8 +51,10 @@
         <TextBlock Grid.Row="0" Grid.Column="0"  Text="Background"/>
         <TextBlock Grid.Row="1" Grid.Column="0"  Text="Foreground"/>
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Width"/>
+        
         <TextBlock Grid.Row="3" Grid.Column="0" 
                    Text="Height"/>
+        
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Thickness"/>
 
         <Button x:Name="Button_Ok" Grid.Row="5" Grid.Column="0" Margin="15" FontSize="16"

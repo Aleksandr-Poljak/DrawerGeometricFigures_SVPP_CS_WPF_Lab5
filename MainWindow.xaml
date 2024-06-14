@@ -10,20 +10,22 @@
         >
     <Window.Resources>
 
-        <Style TargetType="Menu" x:Name="Style_Menu" >
-            <Setter Property="Margin" Value="5 0 0 0"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Padding" Value="3"/>
-            <Setter Property="FontFamily" Value="Centaur"/>
+        <!-- Style for Menu -->
+        <Style x:Key="Style_Menu">
+            <Setter Property="Menu.FontSize" Value="16"/>
+            <Setter Property="Menu.FontFamily" Value="Centaur"/>
+            <Setter Property="Menu.Margin" Value="5 0 0 0"/>
+            <Setter Property="Menu.Foreground" Value="LightGray"/>
         </Style>
         
-        <Style TargetType="TextBlock" x:Name="Style_TextBlock">
+        <!--Style for TextBlock-->
+        <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="8 0 0 0"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Padding" Value="3"/>
             <Setter Property="FontFamily" Value="Arial"/>
         </Style>
-        
+
     </Window.Resources>
     
     <Window.CommandBindings>
@@ -35,36 +37,102 @@
                         Executed="Load_Executed"/>
         <CommandBinding x:Name="CommandBnd_Save" Command="ApplicationCommands.Save"
                         Executed="Save_Executed"/>
-        <CommandBinding x:Name="CommandBnd_Clear" Command="local:WindowCommands.Clear" Executed="Clear_Executed"
+        <CommandBinding x:Name="CommandBnd_Clear" Command="local:WindowCommands.Clear" 
+                        Executed="Clear_Executed"
                         />
     </Window.CommandBindings>
-     
+
     <DockPanel x:Name="DockPanel_Main" LastChildFill="True" Background="LightGray">
-             
-        <!--Menu-->
-        <StatusBar x:Name="SatckPanel_Menu" DockPanel.Dock="Top" Height="40">
-            <Menu x:Name="Menu_Main">
-                <MenuItem x:Name="MenuItem_Shape" Header="Shape" 
-                          Click="MenuItem_Shape_Click"/>
-                
-                <MenuItem x:Name="MenuItem_Element" Header="Element">
-                    <MenuItem x:Name="MenuItem_ElementSave" Header="Save" 
+
+        <ToolBarPanel DockPanel.Dock="Top" Orientation="Vertical">
+            
+            <!-- Menu ToolBar -->
+            <ToolBar x:Name="ToolBar_Menu" Height="29">
+                <Menu x:Name="Menu_Main" Style="{StaticResource Style_Menu}">
+
+                    <MenuItem x:Name="MenuItem_Shape" Header="Shape"
+                          Click="MenuItem_Shape_Click"  HorizontalAlignment="Left"/>
+
+                    <MenuItem x:Name="MenuItem_Element" Header="Element">
+                        <MenuItem x:Name="MenuItem_ElementSave" Header="Save" 
                               Command="ApplicationCommands.Save"/>
-                    <MenuItem x:Name="MenuItem_ElementLoad" Header="Load"
+                        <MenuItem x:Name="MenuItem_ElementLoad" Header="Load"
                               Command="local:WindowCommands.Load"/>
-                </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem x:Name="MenuItem_File" Header="File">
+                        <MenuItem x:Name="MenuItem_FileClear" Header="Clear" 
+                                  Command="local:WindowCommands.Clear"/>
+                    </MenuItem>
+
+                    <MenuItem x:Name="MenuItem_Help" Header="Help" 
+                              Command="ApplicationCommands.Help"/>
+
+                    <MenuItem x:Name="MenuItem_Exit" Header="Exit" 
+                              Command="local:WindowCommands.Exit"/>
+                </Menu>
+            </ToolBar>
+
+            <!-- Buttons ToolBar -->
+            <ToolBar Height="35">
                 
-                <MenuItem x:Name="MenuItem_File" Header="File">
-                    <MenuItem x:Name="MenuItem_FileClear" Header="Clear"
-                              Command="local:WindowCommands.Clear"/>
-                </MenuItem>
-                
-                <MenuItem x:Name="MenuItem_Help" Header="Help"
-                          Command="ApplicationCommands.Help"/>
-                <MenuItem x:Name="MenuItem_Exit" Header="Exit" 
-                          Command="local:WindowCommands.Exit"/>
-            </Menu>
-        </StatusBar>
+                <Button x:Name="Btn_Save" Command="ApplicationCommands.Save"
+                        >
+                    <Button.Content>
+                        <Image Source="Images/save.png"/>
+                    </Button.Content>
+                    <Button.Margin>
+                        10 0 0 0
+                    </Button.Margin>
+                    <Button.ToolTip>
+                        Save to JSON
+                    </Button.ToolTip>
+                    <Button.IsEnabled>
+                        <Binding ElementName="MenuItem_ElementSave" Path="IsEnabled" />
+                    </Button.IsEnabled>
+                </Button>
+
+                <Button x:Name="Bnt_Load" Command="local:WindowCommands.Load">
+                    <Button.Content>
+                        <Image Source="Images/load.png"/>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        Load from JSON
+                    </Button.ToolTip>
+                </Button>
+
+                <Button x:Name="Btn_Clear" Command="local:WindowCommands.Clear">
+                    <Button.Content>
+                        <Image Source="Images/clear.png"/>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        Clear area
+                    </Button.ToolTip>
+                    <Button.IsEnabled>
+                        <Binding ElementName="MenuItem_ElementClear" Path="IsEnabled" />
+                    </Button.IsEnabled>
+                </Button>
+
+                <Button x:Name="Bnt_Help" Command="ApplicationCommands.Help">
+                    <Button.Content>
+                        <Image Source="Images/help.png"/>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        Help me
+                    </Button.ToolTip>
+                </Button>
+
+                <Button x:Name="Btn_Exit" Command="local:WindowCommands.Exit">
+                    <Button.Content>
+                        <Image Source="Images/exit.png"/>
+                    </Button.Content>
+                    <Button.ToolTip>
+                        Program close
+                    </Button.ToolTip>
+                </Button>
+
+            </ToolBar>
+        </ToolBarPanel>
 
         <!--Footer-->
         <StatusBar x:Name="StatusBar_Footer" DockPanel.Dock="Bottom" Height="40">
@@ -80,7 +148,9 @@
         </StatusBar>
 
         <!--Working zone-->
-        <Canvas x:Name="Canvas_WorkingArea" Background="BlanchedAlmond" MouseLeftButtonDown="MouseLeftBtnDown_Clik" MouseMove="MouseMove_Motion">
+        <Canvas x:Name="Canvas_WorkingArea" Background="BlanchedAlmond" 
+                MouseLeftButtonDown="MouseLeftBtnDown_Clik" 
+                MouseMove="MouseMove_Motion">
         </Canvas>
 
     </DockPanel>
