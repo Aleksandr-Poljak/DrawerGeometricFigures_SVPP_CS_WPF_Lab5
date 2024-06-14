@@ -12,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace DrawerGeometricFigures
+namespace DrawerGeometricFigures.Shapes
 {
     public class ShapeEllipse
     {
@@ -39,15 +39,15 @@ namespace DrawerGeometricFigures
             Foreground = allCollors[rd.Next(allCollors.Count)];
             Background = _getRandomLenearGradientBrush();
         }
-   
+
         public ShapeEllipse(int width, int height, int tickness,
-            Color? foreground = null, LinearGradientBrush? background = null) :this()
+            Color? foreground = null, LinearGradientBrush? background = null) : this()
         {
             Width = width;
             Height = height;
             Thickness = tickness;
-            if (foreground is not null) { Foreground = (Color) foreground; }
-            if (background is not null) { Background = (LinearGradientBrush)background; }
+            if (foreground is not null) { Foreground = (Color)foreground; }
+            if (background is not null) { Background = background; }
         }
 
         /// <summary>
@@ -56,13 +56,13 @@ namespace DrawerGeometricFigures
         /// </summary>
         /// <param name="star"></param>
         public ShapeEllipse(ShapeStar star,
-            LinearGradientBrush? background = null, Color? foreground = null) :this()
+            LinearGradientBrush? background = null, Color? foreground = null) : this()
         {
             Width = star.Width;
             Height = star.Height;
             Thickness = star.Thickness;
             if (foreground is not null) { Foreground = (Color)foreground; }
-            if (background is not null) { Background = (LinearGradientBrush)background; }
+            if (background is not null) { Background = background; }
         }
 
         /// <summary>
@@ -122,6 +122,6 @@ namespace DrawerGeometricFigures
             }
             allCollors.TrimExcess();
         }
-            
+
     }
 }

@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:DrawerGeometricFigures"
         mc:Ignorable="d"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:shapes="clr-namespace:DrawerGeometricFigures.Shapes"
         Title="Star settings" Height="400" Width="350"
         ResizeMode="CanMinimize">
     <Window.Resources>
 
-        <local:ShapeStar x:Key="ShapeStarResource"/>
+        <shapes:ShapeStar x:Key="ShapeStarResource"/>
         
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>

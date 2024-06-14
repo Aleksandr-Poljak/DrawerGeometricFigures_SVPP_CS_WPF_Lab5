@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DrawerGeometricFigures.Shapes;
+using Microsoft.Win32;
 using System.CodeDom;
 using System.Diagnostics.Metrics;
 using System.IO;

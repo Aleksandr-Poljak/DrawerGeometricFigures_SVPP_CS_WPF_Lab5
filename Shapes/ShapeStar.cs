@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit.Core.Converters;
 
-namespace DrawerGeometricFigures
+namespace DrawerGeometricFigures.Shapes
 {
     public class ShapeStar : INotifyPropertyChanged, ICloneable
     {
@@ -139,8 +139,8 @@ namespace DrawerGeometricFigures
             {
                 // Rotate by -90 degrees to align the top vertex
                 double angle = (i * 36 - 90) * Math.PI / 180;
-                double radiusX = (i % 2 == 0) ? outerRadiusX : innerRadiusX;
-                double radiusY = (i % 2 == 0) ? outerRadiusY : innerRadiusY;
+                double radiusX = i % 2 == 0 ? outerRadiusX : innerRadiusX;
+                double radiusY = i % 2 == 0 ? outerRadiusY : innerRadiusY;
 
                 double px = cx + radiusX * Math.Cos(angle);
                 double py = cy + radiusY * Math.Sin(angle);
