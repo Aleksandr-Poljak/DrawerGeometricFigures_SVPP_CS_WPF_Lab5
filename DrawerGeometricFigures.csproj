@@ -9,7 +9,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="images\clear.png" />
+    <None Remove="images\exit.png" />
+    <None Remove="images\help.png" />
+    <None Remove="images\load.png" />
+    <None Remove="images\save.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetProjects.Extended.Wpf.Toolkit" Version="5.0.115" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\clear.png" />
+    <Resource Include="images\exit.png" />
+    <Resource Include="images\help.png" />
+    <Resource Include="images\load.png" />
+    <Resource Include="images\save.png" />
   </ItemGroup>
 
 </Project>
