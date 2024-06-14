@@ -25,22 +25,44 @@
         </Style>
         
     </Window.Resources>
+    
+    <Window.CommandBindings>
+        <CommandBinding x:Name="CommandBnd_Help" Command="ApplicationCommands.Help" 
+                Executed="Help_Executed"/>
+        <CommandBinding x:Name="CommandBnd_Exit" Command="local:WindowCommands.Exit"
+                        Executed="Exit_Executed"/>
+        <CommandBinding x:Name="CommandBnd_Load" Command="local:WindowCommands.Load"
+                        Executed="Load_Executed"/>
+        <CommandBinding x:Name="CommandBnd_Save" Command="ApplicationCommands.Save"
+                        Executed="Save_Executed"/>
+        <CommandBinding x:Name="CommandBnd_Clear" Command="local:WindowCommands.Clear" Executed="Clear_Executed"
+                        />
+    </Window.CommandBindings>
+     
     <DockPanel x:Name="DockPanel_Main" LastChildFill="True" Background="LightGray">
-        
-
+             
         <!--Menu-->
         <StatusBar x:Name="SatckPanel_Menu" DockPanel.Dock="Top" Height="40">
             <Menu x:Name="Menu_Main">
-                <MenuItem x:Name="MenuItem_Shape" Header="Shape" Click="MenuItem_Shape_Click"/>
+                <MenuItem x:Name="MenuItem_Shape" Header="Shape" 
+                          Click="MenuItem_Shape_Click"/>
+                
                 <MenuItem x:Name="MenuItem_Element" Header="Element">
-                    <MenuItem x:Name="MenuItem_ElementSave" Header="Save" />
-                    <MenuItem x:Name="MenuItem_ElementLoad" Header="Load"/>
+                    <MenuItem x:Name="MenuItem_ElementSave" Header="Save" 
+                              Command="ApplicationCommands.Save"/>
+                    <MenuItem x:Name="MenuItem_ElementLoad" Header="Load"
+                              Command="local:WindowCommands.Load"/>
                 </MenuItem>
+                
                 <MenuItem x:Name="MenuItem_File" Header="File">
-                    <MenuItem x:Name="MenuItem_FileClear" Header="Clear"/>
+                    <MenuItem x:Name="MenuItem_FileClear" Header="Clear"
+                              Command="local:WindowCommands.Clear"/>
                 </MenuItem>
-                <MenuItem x:Name="MenuItem_Help" Header="Help"/>
-                <MenuItem x:Name="MenuItem_Exit" Header="Exit" />
+                
+                <MenuItem x:Name="MenuItem_Help" Header="Help"
+                          Command="ApplicationCommands.Help"/>
+                <MenuItem x:Name="MenuItem_Exit" Header="Exit" 
+                          Command="local:WindowCommands.Exit"/>
             </Menu>
         </StatusBar>
 

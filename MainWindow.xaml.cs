@@ -1,5 +1,10 @@
-﻿using System.Diagnostics.Metrics;
+﻿using Microsoft.Win32;
+using System.CodeDom;
+using System.Diagnostics.Metrics;
+using System.IO;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,6 +19,22 @@ using System.Windows.Shapes;
 
 namespace DrawerGeometricFigures
 {
+
+    public class WindowCommands
+    {
+        static WindowCommands()
+        {
+            Exit = new RoutedCommand("Exit", typeof(MainWindow));
+            Load = new RoutedCommand("Load", typeof(MainWindow),
+                new InputGestureCollection() { new KeyGesture(Key.L, ModifierKeys.Control) });
+            Clear = new RoutedCommand("Clear", typeof (MainWindow),
+                new InputGestureCollection() { new KeyGesture(Key.D, ModifierKeys.Control) });
+        }
+        public static RoutedCommand Exit { get;set; }
+        public static RoutedCommand Load { get; set; }
+        public static RoutedCommand Clear { get; set; }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -32,6 +53,8 @@ namespace DrawerGeometricFigures
         {
             InitializeComponent();
             Loaded += MainWindow_Loaded;
+            CommandBnd_Save.CanExecute += HasElement;
+            CommandBnd_Clear.CanExecute += HasElement;
 
         }
 
@@ -145,7 +168,93 @@ namespace DrawerGeometricFigures
             string text = $"X={mousePoint.X:F1} Y={mousePoint.Y:F1}";
             TextBlock_FooterMausePosition.Text = text;
 
+        }
 
+        /// <summary>
+        /// Handler for the help command.
+        /// </summary>
+        private void Help_Executed(object sender, ExecutedRoutedEventArgs e) 
+        {
+            MessageBox.Show("Dev Поляк А.А.", "Справка");
+        }
+
+        /// <summary>
+        /// Handler for the Exit command.
+        /// </summary>
+        private void Exit_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// Handler for the Load command.
+        /// </summary>
+        private void Load_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Файлы (JSON)|*.json";
+            var result = ofd.ShowDialog();
+            
+            if(result == true)
+            {
+                try
+                {
+                    string jsonStr = "";
+                    using(StreamReader sr = new StreamReader(ofd.FileName))
+                    {
+                        jsonStr = sr.ReadToEnd();
+                    }
+                    
+                    ShapeStar? starTemp = JsonSerializer.Deserialize<ShapeStar>(jsonStr);
+                    if (starTemp is not null) star = starTemp;
+                    else { throw new JsonException(); }                   
+                }
+                catch { MessageBox.Show("Не удалось прочитать данные", "Error"); }
+            }
+
+        }
+
+        /// <summary>
+        /// Handler for the Save command.
+        /// </summary>
+        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            SaveFileDialog sfd =  new SaveFileDialog();
+            sfd.Filter = "Файлы (JSON)|*.json";
+            var result = sfd.ShowDialog();
+            
+            if(result == true)
+            {               
+                try
+                {
+                    string jsonStr = JsonSerializer.Serialize(star);
+                    using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                    {
+                        sw.Write(jsonStr);
+                    }                    
+                }
+                catch (Exception ex) 
+                { MessageBox.Show("Ошибка при сохранении файла", "Error" );}                             
+            }
+        }
+
+        /// <summary>
+        /// The handler for the Save command.
+        /// Checks the condition that the command can be executed.
+        /// </summary>
+        private void HasElement(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = Canvas_WorkingArea.Children.Count > 0;
+        }
+
+        /// <summary>
+        /// Handler for the Clear command.
+        /// </summary>
+        private void Clear_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            Canvas_WorkingArea.Children.Clear();
+            countStar = 0;
+            TextBlock_FooterCountStar.Text = $"Star={countStar}";
         }
     }
 }
