@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace DrawerGeometricFigures
         public HelpWindow()
         {
             InitializeComponent();
+            initHelpText();
         }
 
         private void Btn_Close_Click(object sender, RoutedEventArgs e)
@@ -29,5 +31,22 @@ namespace DrawerGeometricFigures
             this.Close();
         }
 
+        private string readHelpText()
+        {
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HelpWindow", "help.txt");
+            string helpTxt = "";
+
+            using (StreamReader tr = new StreamReader(filePath))
+            {
+                helpTxt = tr.ReadToEnd();
+            }
+            return helpTxt;
+        }
+
+        private void initHelpText()
+        {
+            string txt = readHelpText();
+            if(txt != "") TextBlock_Text.Text = txt;    
+        }
     }
 }

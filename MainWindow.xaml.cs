@@ -115,8 +115,9 @@ namespace DrawerGeometricFigures
             {
                 starSettingsWindow = new StarSettingsWindow(ref star) { Owner=this };
 
-                // Set the background of the main window to the child window.
+                // Set the background and icon of the main window to the child window.
                 starSettingsWindow.Background = ((DockPanel)this.Content).Background;
+                starSettingsWindow.Icon = this.Icon;
                 //Deletes an instance of the window after it is closed.
                 starSettingsWindow.Closed += (object? sender, EventArgs e) => starSettingsWindow = null;
 
@@ -181,6 +182,7 @@ namespace DrawerGeometricFigures
             {
                 helpWindow = new HelpWindow() { Owner = this };
                 helpWindow.Background = ((DockPanel)this.Content).Background;
+                helpWindow.Icon = this.Icon;
                 helpWindow.Closed += (object? sender, EventArgs e) => helpWindow = null;
                 helpWindow.Show();
             }

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrawerGeometricFigures"
         mc:Ignorable="d"
-        ResizeMode="CanMinimize"
-        Title="Help" Height="400" Width="400">
+        Title="Help" Height="500" Width="500"
+        >
     <Window.Resources>
         <Style x:Key="TxtBlock_Author">
             <Setter Property="TextBlock.Opacity" Value="0"/>
@@ -23,7 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="0.25*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.25*"/>
+            <RowDefinition Height="0.20*"/>
             <RowDefinition Height="0.1*"/>
         </Grid.RowDefinitions>
         
@@ -31,18 +31,21 @@
                    FontSize="18" FontFamily="Arial" FontWeight="Bold" FontStyle="Italic"
                    HorizontalAlignment="Center" VerticalAlignment="Center"
                    Padding="5"/>
-        
-        <TextBlock x:Name="TextBlock_Text" Grid.Row="1"
-                   FontSize="16" FontFamily="Arial" FontWeight="Normal" FontStyle="Italic"
-                   HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                   Padding="5"/>
-        
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="TextBlock_Text"
+                       FontSize="16" FontFamily="Arial" FontWeight="Normal" FontStyle="Italic"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                       TextWrapping="Wrap" Padding="5"/>
+        </ScrollViewer>
+
         <TextBlock x:Name="TextBlock_Author" Grid.Row="3" Text="Выполнил: Поляк А. А."
                     FontSize="10" FontFamily="Arial" FontWeight="Normal" FontStyle="Italic"
                     HorizontalAlignment="Right" VerticalAlignment="Top"
                     Padding="3" Style="{StaticResource TxtBlock_Author}"/>
         
         <Button x:Name="Btn_Close" Content="Закрыть" Grid.Row="2"
+                Background="SlateGray"
                 Margin="45 15 45 15" Click="Btn_Close_Click"/>
     </Grid>
 </Window>
