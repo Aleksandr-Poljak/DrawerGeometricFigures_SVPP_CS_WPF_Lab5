@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DrawerGeometricFigures.Shapes;
+using Microsoft.Win32;
 using System.CodeDom;
 using System.Diagnostics.Metrics;
 using System.IO;
@@ -41,7 +42,9 @@ namespace DrawerGeometricFigures
     public partial class MainWindow : Window
     {
         ShapeStar star = new();
+
         StarSettingsWindow? starSettingsWindow = null;
+        HelpWindow? helpWindow = null;
 
         Random rd = new();
         private double canvasWidth;
@@ -167,15 +170,21 @@ namespace DrawerGeometricFigures
             Point mousePoint = e.GetPosition(Canvas_WorkingArea);
             string text = $"X={mousePoint.X:F1} Y={mousePoint.Y:F1}";
             TextBlock_FooterMausePosition.Text = text;
-
         }
 
         /// <summary>
         /// Handler for the help command.
         /// </summary>
-        private void Help_Executed(object sender, ExecutedRoutedEventArgs e) 
+        private void Help_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("Dev Поляк А.А.", "Справка");
+            if (helpWindow is null)
+            {
+                helpWindow = new HelpWindow() { Owner = this };
+                helpWindow.Background = ((DockPanel)this.Content).Background;
+                helpWindow.Closed += (object? sender, EventArgs e) => helpWindow = null;
+                helpWindow.Show();
+            }
+            else { helpWindow.Focus(); }
         }
 
         /// <summary>
