@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace DrawerGeometricFigures
 {
     /// <summary>
@@ -33,7 +34,7 @@ namespace DrawerGeometricFigures
 
         private string readHelpText()
         {
-            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "HelpWindow", "help.txt");
+            string filePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Help", "help.txt");
             string helpTxt = "";
 
             using (StreamReader tr = new StreamReader(filePath))

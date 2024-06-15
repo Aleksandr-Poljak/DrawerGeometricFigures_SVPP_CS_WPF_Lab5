@@ -10,6 +10,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Release\**" />
+    <EmbeddedResource Remove="Release\**" />
+    <None Remove="Release\**" />
+    <Page Remove="Release\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="DrawerGeometricFigures.exe" />
     <None Remove="Images\clear.png" />
     <None Remove="Images\exit.png" />
     <None Remove="Images\help.png" />
@@ -36,8 +44,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="HelpWindow\help.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="Help\help.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
